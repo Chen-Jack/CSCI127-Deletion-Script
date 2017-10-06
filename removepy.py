@@ -2,19 +2,21 @@ import os
 import sys
 
 script_loc = os.getcwd()  #The "home" directory in respect to the location of this script
+tag_path = script_loc+"/.target_tags"  #This is the path to my hidden file ".target_tags"
+
+def removefiles(item,tag_list):
+  for tag in tag_list:
+    if(item.endswith(tag)):
+      os.remove(item)
+      
 
 if(len(sys.argv) == 1):   #no arguments
   print("Deleting Python files...")
 
-  def removefiles(item,tag_list):
-    for tag in tag_list:
-      if(item.endswith(tag)):
-        os.remove(item)
-      
   home_path = os.getenv("HOME")
-  os.chdir(home_path)
+  os.chdir(home_path)					#LOCATION == HOME
 
-  target_file = open(script_loc+"/.target_tags")
+  target_file = open(tag_path)
   target_tags = (target_file.readline()).split()
   target_file.close()
 
@@ -60,7 +62,7 @@ if(len(sys.argv) == 1):   #no arguments
     
 elif(len(sys.argv) == 2):
   if(sys.argv[1] == "-show"):
-    current_flag_file = open(script_loc+"/.target_tags")
+    current_flag_file = open(tag_path)
     current_flags = (current_flag_file.readline()).split()
     print("Current Targets:")
     for flag in current_flags:
@@ -71,11 +73,11 @@ elif(len(sys.argv) == 2):
     print("Invalid use of flags.")
 elif(len(sys.argv) == 3):
   if(sys.argv[1] == "-update"):
-    current_flag_file = open(script_loc+"/.target_tags",'a')
+    current_flag_file = open(tag_path,'a')
     current_flag_file.write(" "+sys.argv[2])
     current_flag_file.close()
   elif(sys.argv[1] == "-remove"):
-    current_flag_file = open(script_loc+"/.target_tags")
+    current_flag_file = open(tag_path)
     current_flags = (current_flag_file.readline()).split()
     current_flag_file.close()
 
@@ -85,7 +87,7 @@ elif(len(sys.argv) == 3):
         new_string+= (flag + " ") 
  
 	#now we overwrite the old tags with new one
-    current_flag_file = open(script_loc+"/.target_tags",'w') 
+    current_flag_file = open(tag_path,'w') 
     current_flag_file.write(new_string)
     current_flag_file.close()
   else:
