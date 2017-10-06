@@ -14,7 +14,7 @@ if(len(sys.argv) == 1):   #no arguments
   home_path = os.getenv("HOME")
   os.chdir(home_path)
 
-  target_file = open(script_loc+"/.target_tags"))
+  target_file = open(script_loc+"/.target_tags")
   target_tags = (target_file.readline()).split()
   target_file.close()
 
@@ -58,7 +58,7 @@ if(len(sys.argv) == 1):   #no arguments
 
   print("Done.")  #Done deleting the files.
     
-elif(len(sys.argv) == 2)):
+elif(len(sys.argv) == 2):
   if(sys.argv[1] == "-show"):
     current_flag_file = open(script_loc+"/.target_tags")
     current_flags = (current_flag_file.readline()).split()
@@ -66,21 +66,26 @@ elif(len(sys.argv) == 2)):
     for flag in current_flags:
       print(flag, end=" ")
     print()
-    current_flag.close()
+    current_flag_file.close()
   else:
     print("Invalid use of flags.")
-elif(len(sys.argv) == 3)):
+elif(len(sys.argv) == 3):
   if(sys.argv[1] == "-update"):
     current_flag_file = open(script_loc+"/.target_tags",'a')
-    current_flag_file.write(" "+sys.arv[2])
+    current_flag_file.write(" "+sys.argv[2])
     current_flag_file.close()
   elif(sys.argv[1] == "-remove"):
-    current_flag_file = open(script_loc+"/.target_tags",'w')
-    current_flags = (current_flag_file.readline).split()
+    current_flag_file = open(script_loc+"/.target_tags")
+    current_flags = (current_flag_file.readline()).split()
+    current_flag_file.close()
+
     new_string = ""
     for flag in current_flags:
-      if(flag != sys.arg[v]):
-        new_string+= (flag + " ")  
+      if(flag != sys.argv[2]):
+        new_string+= (flag + " ") 
+ 
+	#now we overwrite the old tags with new one
+    current_flag_file = open(script_loc+"/.target_tags",'w') 
     current_flag_file.write(new_string)
     current_flag_file.close()
   else:
