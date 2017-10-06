@@ -11,7 +11,7 @@ def removefiles(item,tag_list):
       
 
 if(len(sys.argv) == 1):   #no arguments
-  print("Deleting Python files...")
+  print("Cleaning...")
 
   home_path = os.getenv("HOME")
   os.chdir(home_path)					#LOCATION == HOME
