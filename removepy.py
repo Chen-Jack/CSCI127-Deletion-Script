@@ -1,61 +1,95 @@
 import os
+import sys
 
-print("Deleting Python files...")
+if(len(sys.argv) == 1):   #no arguments
+  print("Deleting Python files...")
 
-def removefiles(item,tag_list):
-  for tag in tag_list:
-    if(item.endswith(tag)):
+  def removefiles(item,tag_list):
+    for tag in tag_list:
+      if(item.endswith(tag)):
+        os.remove(item)
+      
+  home_path = os.getenv("HOME")
+  os.chdir(home_path)
+
+  target_file = open(".target_tag")
+  target_tags = (target_file.readline()).split()
+  target_file.close()
+
+  #Delete target files in home directory
+  for item in os.listdir(home_path):
+    if os.path.isfile(item) and (not item.startswith(".")): #don't delete hidden files
+      removefiles(item, target_tags)
+
+  #Delete target files 1 level down from home.
+  for content in os.listdir(home_path): 
+    if os.path.isdir(content) and (not content.startswith(".")): #dont check hidden directories
+      os.chdir(os.path.abspath(content))	#Go down 1 level
+      for item in os.listdir(os.getcwd()):
+        if os.path.isfile(item) and (not item.startswith(".")): #don't delete hidden files
+          removefiles(item, target_tags)
+      os.chdir("..") # go back up 1 level(home)
+
+  os.chdir("Desktop") #Delete everything in desktop
+  for item in os.listdir(os.getcwd()):
+    if(os.path.isfile(item)):
       os.remove(item)
+    elif(os.path.isdir(item)):
+      os.rmdir(item)
+  os.chdir(home_path)
+
+  os.chdir("Downloads") #Delete everything in downloads
+  for item in os.listdir(os.getcwd()):
+    if(os.path.isfile(item)):
+      os.remove(item)
+    elif(os.path.isdir(item)):
+      os.rmdir(item)
+  os.chdir(home_path)
+
+  os.chdir("Documents") #Delete everything in documents
+  for item in os.listdir(os.getcwd()):
+    if(os.path.isfile(item)):
+      os.remove(item)
+    elif(os.path.isdir(item)):
+      os.rmdir(item)
+  os.chdir(home_path)
+
+  print("Done.")  #Done deleting the files.
     
-home_path = os.getenv("HOME")
-os.chdir(home_path)
-
-target_tags = [".py", ".png", ".txt"]
-
-#Delete target files in home directory
-for item in os.listdir(os.getcwd()):
-  if os.path.isfile(item) and (not item.startswith(".")):
-    removefiles(item, target_tags)
-
-#Delete target files 1 level in from home.
-for content in os.listdir(os.getcwd()):
-  if os.path.isdir(content) and (not content.startswith(".")): #dont check hidden directories
-    os.chdir(os.path.abspath(content))	#Go down 1 level
-    for item in os.listdir(os.getcwd()):
-      if os.path.isfile(item) and (not item.startswith(".")):
-        removefiles(item, target_tags)
-    os.chdir("..") # go back up 1 level(home)
-
-os.chdir("Desktop") #Delete evreything in desktop
-for item in os.listdir(os.getcwd()):
-  if(os.path.isfile(item)):
-    os.remove(item)
-  elif(os.path.isdir(item)):
-    os.rmdir(item)
-os.chdir(home_path)
-
-os.chdir("Downloads")
-for item in os.listdir(os.getcwd()):
-  if(os.path.isfile(item)):
-    os.remove(item)
-  elif(os.path.isdir(item)):
-    os.rmdir(item)
-os.chdir(home_path)
-
-os.chdir("Documents")
-for item in os.listdir(os.getcwd()):
-  if(os.path.isfile(item)):
-    os.remove(item)
-  elif(os.path.isdir(item)):
-    os.rmdir(item)
-os.chdir(home_path)
-
-print("Done.")
+elif(len(sys.argv == 2)):
+  if(sys.argv[1] == "-show"):
+    current_flag_file = open(".target_tags")
+    current_flags = (current_flag_file.readline()).split()
+    print("Current Targets:")
+    for flag in current_flags:
+      print(flag, end=" ")
+    print()
+    current_flag.close()
+  else:
+    print("Invalid use of flags.")
+elif(len(sys.argv == 3)):
+  if(sys.argv[1] == "-update"):
+    current_flag_file = open(".target_tags",'a')
+    current_flag_file.write(" "+sys.arv[2])
+    current_flag_file.close()
+  elif(sys.argv[1] == "-remove"):
+    current_flag_file = open(".target_tags",'w')
+    current_flags = (current_flag_file.readline).split()
+    new_string = ""
+    for flag in current_flags:
+      if(flag != sys.arg[v]):
+        new_string+= (flag + " ")  
+    current_flag_file.write(new_string)
+    current_flag_file.close()
+  else:
+    print("Invalid use of flags.")    
+else:
+  print("Invalid use of flags.")
 
 
 
 
-	
+    
 
 
 
