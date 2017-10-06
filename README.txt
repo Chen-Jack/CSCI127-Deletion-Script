@@ -5,7 +5,7 @@ This script is written with the intention to be run on the laptops
 located at 1001E at North Building. Caution when running on other machines.
 
 To install the script, navigate to the location of this directory. Then
-enter "python3 installscripy.py". 
+enter "python3 installscript.py". 
 
 FLAG OPTIONS
 -show            (shows all tags flagged for deletion)
@@ -17,9 +17,9 @@ FLAG OPTIONS
 MAIN FUNCTIONALITY
 
 The main functionality of these scripts is to remove all files who's tag is 
-targeted for deletion. The script will delete all non-hidden files with 
-a targeted tag in the home directory and all files that are one level down from
-the home directory.
+targeted for deletion. [Default tags: .py .txt .png]
+The script will delete all non-hidden files with a targeted tag in the home 
+directory and all files that are one level down from the home directory.
 Afterwords, the script will delete EVERYTHING(including directories) within
 the Desktop, Downloads and Documents folders.
 
