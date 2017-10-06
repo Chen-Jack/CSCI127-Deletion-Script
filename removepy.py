@@ -1,8 +1,7 @@
 import os
 import sys
-from os.path import expanduser
 
-script_loc = os.getcwd()
+script_loc = os.getcwd()  #The "home" directory in respect to the location of this script
 
 if(len(sys.argv) == 1):   #no arguments
   print("Deleting Python files...")
@@ -15,7 +14,7 @@ if(len(sys.argv) == 1):   #no arguments
   home_path = os.getenv("HOME")
   os.chdir(home_path)
 
-  target_file = open(os.path.expanduser(script_loc+"/.target_tags.txt"))
+  target_file = open(script_loc+"/.target_tags"))
   target_tags = (target_file.readline()).split()
   target_file.close()
 
@@ -59,9 +58,9 @@ if(len(sys.argv) == 1):   #no arguments
 
   print("Done.")  #Done deleting the files.
     
-elif(len(sys.argv == 2)):
+elif(len(sys.argv) == 2)):
   if(sys.argv[1] == "-show"):
-    current_flag_file = open(".target_tags.txt")
+    current_flag_file = open(script_loc+"/.target_tags")
     current_flags = (current_flag_file.readline()).split()
     print("Current Targets:")
     for flag in current_flags:
@@ -70,13 +69,13 @@ elif(len(sys.argv == 2)):
     current_flag.close()
   else:
     print("Invalid use of flags.")
-elif(len(sys.argv == 3)):
+elif(len(sys.argv) == 3)):
   if(sys.argv[1] == "-update"):
-    current_flag_file = open(".target_tags.txt",'a')
+    current_flag_file = open(script_loc+"/.target_tags",'a')
     current_flag_file.write(" "+sys.arv[2])
     current_flag_file.close()
   elif(sys.argv[1] == "-remove"):
-    current_flag_file = open(".target_tags.txt",'w')
+    current_flag_file = open(script_loc+"/.target_tags",'w')
     current_flags = (current_flag_file.readline).split()
     new_string = ""
     for flag in current_flags:
