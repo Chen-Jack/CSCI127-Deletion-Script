@@ -1,20 +1,21 @@
 import os
 import sys
 
-script_loc = os.getcwd()  #The "home" directory in respect to the location of this script
-tag_path = script_loc+"/.target_tags"  #This is the path to my hidden file ".target_tags"
-
 def removefiles(item,tag_list):
   for tag in tag_list:
     if(item.endswith(tag)):
       os.remove(item)
       
+#Path to location of the script and the tags
+script_loc = os.getcwd()  
+tag_path = script_loc+"/.target_tags"  
 
-if(len(sys.argv) == 1):   #no arguments
+
+if(len(sys.argv) == 1):     #Running the default script
   print("Cleaning...")
 
   home_path = os.getenv("HOME")
-  os.chdir(home_path)					#LOCATION == HOME
+  os.chdir(home_path)				
 
   target_file = open(tag_path)
   target_tags = (target_file.readline()).split()
@@ -25,17 +26,17 @@ if(len(sys.argv) == 1):   #no arguments
     if os.path.isfile(item) and (not item.startswith(".")): #don't delete hidden files
       removefiles(item, target_tags)
 
-  #Delete target files 1 level down from home.
+  #Delete target files 1 level down from home. (Ignoring hidden files/directories)
   for content in os.listdir(home_path): 
-    if os.path.isdir(content) and (not content.startswith(".")): #dont check hidden directories
+    if os.path.isdir(content) and (not content.startswith(".")):
       os.chdir(os.path.abspath(content))	#Go down 1 level
       for item in os.listdir(os.getcwd()):
-        if os.path.isfile(item) and (not item.startswith(".")): #don't delete hidden files
+        if os.path.isfile(item) and (not item.startswith(".")):
           removefiles(item, target_tags)
-      os.chdir("..") # go back up 1 level(home)
+      os.chdir("..") #Go back up 1 level(home)
 
   os.chdir("Desktop") #Delete everything in desktop
-  if len(os.listdir(os.getcwd())) > 0: #Ugly way of saying, is the directory empty
+  if len(os.listdir(os.getcwd())) > 0: #Ugly way of checking if empty
     os.system("rm -r *")
   os.chdir(home_path)
 
@@ -52,7 +53,7 @@ if(len(sys.argv) == 1):   #no arguments
   print("Done.")  #Done deleting the files.
     
 elif(len(sys.argv) == 2):
-  if(sys.argv[1] == "-show"):
+  if(sys.argv[1] == "-show"):           ### SHOW ###
     current_flag_file = open(tag_path)
     current_flags = (current_flag_file.readline()).split()
     print("Current Targets:")
@@ -60,25 +61,51 @@ elif(len(sys.argv) == 2):
       print(flag, end=" ")
     print()
     current_flag_file.close()
+  
+  elif(sys.argv[1] == "-uninstall"):    ### UNINSTALL ###
+    home_path = os.getenv("HOME")
+    os.chdir(home_path)		  #Delete the folder
+
+    alias_file = open(".bash_aliases")          #Delete alias entry
+
+    comment = "#Alias for running a python deletion script for csci127 at Hunter College.\n
+    alias = "cd; cd .127pythonscript; python3 removepy.py; cd;"
+    file_line = [comment, alias ]
+    new_data =""
+    for line in alias_file:
+      if (line not in file_line):
+        new_data+= line
+    alias_file.close()
+    alias_file.open(".bash_aliases",'w')
+    alias_file.write(new_data)
+    alias_file.close()
+
+    print("Script has been removed.")
+
+    os.system("rm -r .127pythonscript")
+
   else:
     print("Invalid use of flags.")
+
+#Code base for updating the tags.    
 elif(len(sys.argv) == 3):
-  if(sys.argv[1] == "-update"):
+
+  if(sys.argv[1] == "-update"):        ### UPDATE ###
     current_flag_file = open(tag_path,'a')
     current_flag_file.write(" "+sys.argv[2])
     current_flag_file.close()
-  elif(sys.argv[1] == "-remove"):
+
+  elif(sys.argv[1] == "-remove"):       ### REMOVE ###
     current_flag_file = open(tag_path)
     current_flags = (current_flag_file.readline()).split()
     current_flag_file.close()
 
-    new_string = ""
+    new_string = ""   #Reconstructing the data (excluding the marked tag)
     for flag in current_flags:
       if(flag != sys.argv[2]):
         new_string+= (flag + " ") 
  
-	#now we overwrite the old tags with new one
-    current_flag_file = open(tag_path,'w') 
+    current_flag_file = open(tag_path,'w') #Overwrite the file with new data
     current_flag_file.write(new_string)
     current_flag_file.close()
   else:

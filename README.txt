@@ -1,14 +1,10 @@
 The following scripts are written by Jack Chen of Hunter College.
 
-Currently Working On:
-Removing directories
-
-NOTES: 
+NOTE: 
 This script is written with the intention to be run on the laptops
 located at 1001E at North Building. Caution when running on other machines.
 
-
-To install the script, navigate to the location of this folder. Then
+To install the script, navigate to the location of this directory. Then
 enter "python3 installscripy.py". 
 
 FLAG OPTIONS
