@@ -35,27 +35,18 @@ if(len(sys.argv) == 1):   #no arguments
       os.chdir("..") # go back up 1 level(home)
 
   os.chdir("Desktop") #Delete everything in desktop
-  for item in os.listdir(os.getcwd()):
-    if(os.path.isfile(item)):
-      os.remove(item)
-    #elif(os.path.isdir(item)):
-      #os.rmdir(item)
+  if len(os.listdir(os.getcwd())) > 0: #Ugly way of saying, is the directory empty
+    os.system("rm -r *")
   os.chdir(home_path)
 
   os.chdir("Downloads") #Delete everything in downloads
-  for item in os.listdir(os.getcwd()):
-    if(os.path.isfile(item)):
-      os.remove(item)
-    #elif(os.path.isdir(item)):
-      #os.rmdir(item)
+  if len(os.listdir(os.getcwd())) > 0:  
+    os.system("rm -r *")
   os.chdir(home_path)
 
   os.chdir("Documents") #Delete everything in documents
-  for item in os.listdir(os.getcwd()):
-    if(os.path.isfile(item)):
-      os.remove(item)
-    #elif(os.path.isdir(item)):
-     # os.rmdir(item)
+  if len(os.listdir(os.getcwd())) > 0:  
+    os.system("rm -r *")
   os.chdir(home_path)
 
   print("Done.")  #Done deleting the files.
