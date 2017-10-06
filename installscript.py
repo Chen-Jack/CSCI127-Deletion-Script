@@ -11,7 +11,7 @@ os.chdir(".127pythonscript")
 os.system("sudo cp "+scriptlocation+" "+os.getcwd())
 
 #create and insert alias into .bashrc
-new_alias = ' alias removepy="cd; cd .127pythonscript; python3 removepy.py; cd;" '
+new_alias = ' alias removefiles="cd; cd .127pythonscript; python3 removepy.py; cd;" '
 
 os.chdir(home_path)
 bash_file = open(".bashrc",'a') #Gotta open in append mode yo, otherwise we in trouble

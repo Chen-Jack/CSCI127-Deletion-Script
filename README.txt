@@ -6,16 +6,15 @@ Removing directories
 NOTES: 
 This script is written with the intention to be run on the laptops
 located at 1001E at North Building. Caution when running on other machines.
-Python3 should also be installed.
-This should obviously be run on a UNIX type system.
+
 
 To install the script, navigate to the location of this folder. Then
 enter "python3 installscripy.py". 
 
 FLAG OPTIONS
--updatetags [new tags]
--showtags [lists all files to be deleted]
--removetag [tag to remove]
+-update [tag]  (adds a new tag to the list)
+-show (shows all tags flagged for deletion)
+-remove [tag] (removes a tag from the list)
 
 
 MAIN FUNCTIONALITY
@@ -34,4 +33,4 @@ from a USB), into a hidden folder called ".127pythonscript" located at the
 home directory. 
 Afterwards, it will add an alias command into the hidden .bashrc file located
 at the home directory. After closing the terminal, you should be able to 
-call the main script by typing "removepy" into the terminal.
+call the main script by typing "removefiles" into the terminal.
