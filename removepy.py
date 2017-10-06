@@ -1,5 +1,8 @@
 import os
 import sys
+from os.path import expanduser
+
+script_loc = os.getcwd()
 
 if(len(sys.argv) == 1):   #no arguments
   print("Deleting Python files...")
@@ -12,7 +15,7 @@ if(len(sys.argv) == 1):   #no arguments
   home_path = os.getenv("HOME")
   os.chdir(home_path)
 
-  target_file = open(".target_tag")
+  target_file = open(os.path.expanduser(script_loc+"/.target_tags.txt"))
   target_tags = (target_file.readline()).split()
   target_file.close()
 
@@ -34,31 +37,31 @@ if(len(sys.argv) == 1):   #no arguments
   for item in os.listdir(os.getcwd()):
     if(os.path.isfile(item)):
       os.remove(item)
-    elif(os.path.isdir(item)):
-      os.rmdir(item)
+    #elif(os.path.isdir(item)):
+      #os.rmdir(item)
   os.chdir(home_path)
 
   os.chdir("Downloads") #Delete everything in downloads
   for item in os.listdir(os.getcwd()):
     if(os.path.isfile(item)):
       os.remove(item)
-    elif(os.path.isdir(item)):
-      os.rmdir(item)
+    #elif(os.path.isdir(item)):
+      #os.rmdir(item)
   os.chdir(home_path)
 
   os.chdir("Documents") #Delete everything in documents
   for item in os.listdir(os.getcwd()):
     if(os.path.isfile(item)):
       os.remove(item)
-    elif(os.path.isdir(item)):
-      os.rmdir(item)
+    #elif(os.path.isdir(item)):
+     # os.rmdir(item)
   os.chdir(home_path)
 
   print("Done.")  #Done deleting the files.
     
 elif(len(sys.argv == 2)):
   if(sys.argv[1] == "-show"):
-    current_flag_file = open(".target_tags")
+    current_flag_file = open(".target_tags.txt")
     current_flags = (current_flag_file.readline()).split()
     print("Current Targets:")
     for flag in current_flags:
@@ -69,11 +72,11 @@ elif(len(sys.argv == 2)):
     print("Invalid use of flags.")
 elif(len(sys.argv == 3)):
   if(sys.argv[1] == "-update"):
-    current_flag_file = open(".target_tags",'a')
+    current_flag_file = open(".target_tags.txt",'a')
     current_flag_file.write(" "+sys.arv[2])
     current_flag_file.close()
   elif(sys.argv[1] == "-remove"):
-    current_flag_file = open(".target_tags",'w')
+    current_flag_file = open(".target_tags.txt",'w')
     current_flags = (current_flag_file.readline).split()
     new_string = ""
     for flag in current_flags:
