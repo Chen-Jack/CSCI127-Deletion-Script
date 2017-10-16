@@ -77,7 +77,7 @@ elif(len(sys.argv) == 2):
       if (line not in file_line):
         new_data+= line
     alias_file.close()
-    alias_file.open(".bash_aliases",'w')
+    alias_file = open(".bash_aliases",'w')
     alias_file.write(new_data)
     alias_file.close()
 
