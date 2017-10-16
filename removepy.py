@@ -68,7 +68,7 @@ elif(len(sys.argv) == 2):
 
     alias_file = open(".bash_aliases")          #Delete alias entry
 
-    comment = "#Alias for running a python deletion script for csci127 at Hunter College.\n
+    comment = "#Alias for running a python deletion script for csci127 at Hunter College.\n"
     alias = "cd; cd .127pythonscript; python3 removepy.py; cd;"
     file_line = [comment, alias ]
     new_data =""
