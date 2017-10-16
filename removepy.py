@@ -8,7 +8,7 @@ def removefiles(item,tag_list):
       
 #Path to location of the script and the tags
 script_loc = os.getcwd()  
-tag_path = script_loc+"/.target_tags"  
+tag_path = script_loc+".127pythonscript/.target_tags"  
 
 
 if(len(sys.argv) == 1):     #Running the default script
