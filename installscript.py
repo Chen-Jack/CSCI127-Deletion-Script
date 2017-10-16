@@ -21,7 +21,7 @@ if alias_file not in os.listdir(os.getcwd()):
   os.system("touch .bash_aliases")
 
 #Creating an alias
-new_alias = 'alias removefiles="python3 /home/csguest/.127pythonscript/removepy.py;"'
+new_alias = 'alias removefiles="python3 /home/csguest/.127pythonscript/removepy.py "'
 
 print("Creating alias")  
 bash_file = open(alias_file,'a') 
