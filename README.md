@@ -1,5 +1,5 @@
-# THIS SCRIPT IS NO LONGER BEING USED
-### Keeping this here for documentation reasons.
+THIS SCRIPT IS NO LONGER BEING USED
+Keeping this here for documentation reasons.
 
 The following scripts are written by Jack Chen of Hunter College.
 
